@@ -3,6 +3,8 @@ import express from 'express'
 import userRouter from '../src/routers/userRouter.js'
 import propertyRouter from '../src/routers/propertyRouter.js'
 
+"ddd"
+
 const app = express()
 const port = 3000
 
