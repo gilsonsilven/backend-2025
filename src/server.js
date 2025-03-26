@@ -2,13 +2,15 @@
 import express from 'express'
 import userRouter from '../src/routers/userRouter.js'
 import propertyRouter from '../src/routers/propertyRouter.js'
-
+import cors from 'cors'
 "ddd"
 
 const app = express()
 const port = 3000
 
-app.use(express.json())
+app.use(cors())
+app.use(express.json()) // faz o parse do json e transforma em objeto no req.body
+
 
 app.get('/', (req, res) => {
     res.send('<p style="font-size: 500%; color: green; background-color: orange">Bem-vindo a API!</p>')
