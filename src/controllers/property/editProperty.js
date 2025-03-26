@@ -1,11 +1,13 @@
-export default function editProperty(req, res) {
+import { update } from "../../models/propertyModel.js"
+
+export default async function editProperty(req, res) {
+    const {id} = req.params
+    const property = req.body
+
+    const result = await update(+id, property)
+
     return res.json({
-        message: "Imóvel atualizado com sucesso",
-        property: {
-          id: 1,
-          areaTotal: "500m²",
-          endereco: "Rua dos testes",
-          numeroDeQuartos: "2"     
-        }
-    })
+      message: `Imóvel id ${id} atualizado com sucesso`,
+      property: result
+  })
 }
