@@ -1,6 +1,25 @@
 import { PrismaClient } from "@prisma/client";
+import { z } from 'zod'
 
 const prisma = new PrismaClient()
+
+
+// sempre bom colocar um limite máximo de caracteres a serem colocados em um campo
+const propertySchema = z.object({
+    id: z.number().int().positive(),
+    type: z.string().min(5).max(7),
+    address: z.string().min(6).max(500),
+    rooms: z.number().positive(),
+    property: z.string().min(4).max(11)
+})
+
+export const propertyValidator = (property, partial = null) => {
+
+    if(partial) {
+        return propertySchema.partial({partial}).safeParse()
+    }
+    return propertySchema.safeParse(property)
+}
 
 export async function create(property) {
     const result = await prisma.property.create({
