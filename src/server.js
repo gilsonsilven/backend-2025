@@ -3,11 +3,14 @@ import express from 'express'
 import userRouter from '../src/routers/userRouter.js'
 import propertyRouter from '../src/routers/propertyRouter.js'
 import cors from 'cors'
-"ddd"
+import { logger } from './middlewares/logger.js'
+
 
 const app = express()
 const port = 3000
 
+// Middleware
+app.use(logger)
 app.use(cors())
 app.use(express.json()) // faz o parse do json e transforma em objeto no req.body
 
